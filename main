@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Directory & Network</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-graduation-cap text-2xl text-indigo-400"></i>
+                <span class="text-xl font-bold tracking-wide">AlumniConnect</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#" class="hover:text-indigo-300 transition">Directory</a>
+                <a href="#" class="hover:text-indigo-300 transition">Events</a>
+                <a href="#" class="hover:text-indigo-300 transition">Job Board</a>
+                <a href="#" class="hover:text-indigo-300 transition">Success Stories</a>
+            </nav>
+            <div>
+                <button class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-semibold transition shadow">
+                    Sign In / Register
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-900 to-blue-800 text-white py-16 px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl font-extrabold mb-4">Connect and Grow Together</h1>
+            <p class="text-indigo-200 text-lg mb-8">Find old classmates, expand your professional network, share career opportunities, and give back to your alma mater.</p>
+            
+            <!-- Search Bar Box -->
+            <div class="bg-white p-2 rounded-xl shadow-lg flex flex-col md:flex-row gap-2">
+                <div class="flex items-center flex-1 px-3 py-2 bg-slate-100 rounded-lg">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 mr-2"></i>
+                    <input type="text" id="searchInput" onkeyup="filterAlumni()" placeholder="Search by name, company, or skill..." class="bg-transparent w-full focus:outline-none text-slate-800 text-sm">
+                </div>
+                <div class="flex items-center px-3 py-2 bg-slate-100 rounded-lg md:w-48">
+                    <i class="fa-solid fa-calendar-days text-slate-400 mr-2"></i>
+                    <select id="batchFilter" onchange="filterAlumni()" class="bg-transparent w-full focus:outline-none text-slate-800 text-sm">
+                        <option value="">All Batches</option>
+                        <option value="2024">Batch 2024</option>
+                        <option value="2022">Batch 2022</option>
+                        <option value="2020">Batch 2020</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Directory Content -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-slate-800">Alumni Directory</h2>
+            <span class="text-sm text-slate-500" id="resultCount">Showing members</span>
+        </div>
+
+        <!-- Alumni Cards Grid -->
+        <div id="alumniGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Card 1 -->
+            <div class="alumni-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition" data-name="Aarav Sharma" data-batch="2024" data-company="Google">
+                <div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Profile" class="w-14 h-14 rounded-full object-cover border-2 border-indigo-100">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 name-field">Aarav Sharma</h3>
+                            <p class="text-xs text-indigo-600 font-semibold">Batch of 2024 • Computer Science</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4"><i class="fa-solid fa-briefcase mr-2 text-slate-400"></i>Software Engineer at <strong class="text-slate-700">Google</strong></p>
+                    <div class="flex flex-wrap gap-1 mb-4">
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Python</span>
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Cloud</span>
+                    </div>
+                </div>
+                <button onclick="connectAlert('Aarav Sharma')" class="w-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg text-sm transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Connect
+                </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="alumni-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition" data-name="Priya Patel" data-batch="2022" data-company="Microsoft">
+                <div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" alt="Profile" class="w-14 h-14 rounded-full object-cover border-2 border-indigo-100">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 name-field">Priya Patel</h3>
+                            <p class="text-xs text-indigo-600 font-semibold">Batch of 2022 • Electronics</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4"><i class="fa-solid fa-briefcase mr-2 text-slate-400"></i>Product Manager at <strong class="text-slate-700">Microsoft</strong></p>
+                    <div class="flex flex-wrap gap-1 mb-4">
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Management</span>
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Strategy</span>
+                    </div>
+                </div>
+                <button onclick="connectAlert('Priya Patel')" class="w-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg text-sm transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Connect
+                </button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="alumni-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition" data-name="Rahul Verma" data-batch="2020" data-company="Amazon">
+                <div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" alt="Profile" class="w-14 h-14 rounded-full object-cover border-2 border-indigo-100">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 name-field">Rahul Verma</h3>
+                            <p class="text-xs text-indigo-600 font-semibold">Batch of 2020 • Mechanical</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4"><i class="fa-solid fa-briefcase mr-2 text-slate-400"></i>Operations Lead at <strong class="text-slate-700">Amazon</strong></p>
+                    <div class="flex flex-wrap gap-1 mb-4">
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Logistics</span>
+                        <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md">Analytics</span>
+                    </div>
+                </div>
+                <button onclick="connectAlert('Rahul Verma')" class="w-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg text-sm transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Connect
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <p>&copy; 2026 AlumniConnect Network. Powered by Custom Web Tools.</p>
+    </footer>
+
+    <!-- Interactive Search and Filter Script -->
+    <script>
+        function filterAlumni() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let batch = document.getElementById('batchFilter').value;
+            let cards = document.getElementsByClassName('alumni-card');
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name').toLowerCase();
+                let company = cards[i].getAttribute('data-company').toLowerCase();
+                let cardBatch = cards[i].getAttribute('data-batch');
+
+                let matchesSearch = name.includes(input) || company.includes(input);
+                let matchesBatch = batch === "" || cardBatch === batch;
+
+                if (matchesSearch && matchesBatch) {
+                    cards[i].style.display = "flex";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            document.getElementById('resultCount').innerText = `Showing ${visibleCount} members`;
+        }
+
+        function connectAlert(name) {
+            alert(`Connection request sent to ${name}! They will be notified.`);
+        }
+    </script>
+</body>
+</html>
